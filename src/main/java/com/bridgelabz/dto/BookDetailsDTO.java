@@ -12,27 +12,23 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BookDetailsDTO {
-    @NotNull(message = "Book name should not be empty")
-    private String bookName;
-
     @NotNull(message = "Author name should not be empty")
     @Pattern(regexp = "^[A-Z][a-z]{2,}[ ][A-z][a-z]{2,}$", message = "Name is invalid")
     private String bookAuthorName;
+
+    @NotNull(message = "Book name should not be empty")
+    private String bookName;
+
+    private String quantity;
 
     @NotNull(message = "Image should not be empty")
     private String bookImage;
 
     @NotNull(message = "Price should not be empty")
-    private double bookPrice;
-
-    private boolean bookAvailablity;
+    private String bookPrice;
 
     @NotNull(message = "Description should not be empty")
-    @Size(message = "Description should be within 2000 words", max = 2000)
+    @Size(message = "Description should be within 10000 words", max = 10000)
     private String bookDescription;
 
-    private double bookRatings;
-
-    @NotNull(message = "Reviews should not be empty")
-    private String bookReviews;
 }
