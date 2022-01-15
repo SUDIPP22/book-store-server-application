@@ -12,4 +12,6 @@ public interface IBookStoreService {
     Book findBookDetailsById(int id);
 
     ResponseDTO addNewBook(BookDetailsDTO bookDetailsDTO);
+
+    ResponseDTO saveBookData();
 }
