@@ -5,19 +5,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Cart {
+public class Cart implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int cartId;
-
-    private int bookQuantity;
-    private double bookPrice;
-
+    private String bookQuantity;
+    private String bookPrice;
     @OneToOne(cascade = CascadeType.ALL)
     private Book book;
 }

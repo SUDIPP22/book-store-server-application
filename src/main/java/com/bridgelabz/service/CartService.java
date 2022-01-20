@@ -39,12 +39,10 @@ public class CartService implements ICartService {
     @Override
     public ResponseDTO addToCart(CartDTO cartDTO) {
         Book book = checkIdForBook(cartDTO.getBookId());
-
         Cart cartEntity = new Cart();
         cartEntity.setBook(book);
-        cartEntity.setBookPrice(book.getBookPrice()*cartDTO.getBookQuantity());
+        cartEntity.setBookPrice(book.getBookPrice());
         cartEntity.setBookQuantity(cartDTO.getBookQuantity());
-
         cartRepository.save(cartEntity);
         return new ResponseDTO(HttpStatus.CREATED, CART_DETAILS_ADDED);
     }
@@ -63,6 +61,6 @@ public class CartService implements ICartService {
 
     public Book checkIdForBook(int bookId) {
         return bookStoreRepository.findById(bookId)
-                .orElseThrow(() -> new BookNotFoundException(bookId + "" + BOOK_NOT_FOUND));
+                .orElseThrow(() -> new BookNotFoundException(bookId + " " + BOOK_NOT_FOUND));
     }
 }

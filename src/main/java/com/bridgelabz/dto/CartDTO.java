@@ -9,5 +9,5 @@ public class CartDTO {
     @NotNull(message = "Book Id should not be empty")
     private int bookId;
     @NotNull(message = "Book Quantity should not be empty")
-    private int bookQuantity;
+    private String bookQuantity;
 }

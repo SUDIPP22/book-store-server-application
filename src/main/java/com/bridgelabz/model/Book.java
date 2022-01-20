@@ -12,16 +12,14 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Book {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private String bookName;
     private String bookAuthorName;
+    private String bookName;
     private String bookImage;
-    private double bookPrice;
-    private boolean bookAvailablity;
+    private String bookPrice;
+    @Column(length = 10000)
     private String bookDescription;
-    private double bookRatings;
-    private String bookReviews;
+    private String quantity;
 }
