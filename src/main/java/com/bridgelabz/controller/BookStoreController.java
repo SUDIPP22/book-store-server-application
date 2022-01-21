@@ -8,6 +8,7 @@ import com.bridgelabz.model.Book;
 import com.bridgelabz.service.BookStoreService;
 import com.bridgelabz.service.UserService;
 import com.bridgelabz.util.JWTUtility;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping(value = "/book-store")
 public class BookStoreController {
@@ -50,7 +52,7 @@ public class BookStoreController {
 
     @GetMapping(value = "/fetch-details")
     public ResponseEntity<ResponseDTO> saveBookDataFromCSV() {
-       return new ResponseEntity<>(bookStoreService.saveBookData(),HttpStatus.OK);
+        return new ResponseEntity<>(bookStoreService.saveBookData(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/details/{id}")
@@ -63,7 +65,7 @@ public class BookStoreController {
     @PostMapping(value = "/authenticate")
     public JWTResponse authenticate(
             @RequestBody JWTRequest jwtRequest
-            ) throws Exception {
+    ) throws Exception {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
