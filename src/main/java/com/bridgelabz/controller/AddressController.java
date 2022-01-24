@@ -27,18 +27,16 @@ public class AddressController {
     }
 
     @PostMapping(value="/create")
-    public ResponseEntity<String> addAddress(@Valid
+    public ResponseEntity<ResponseDTO> addAddress(@Valid
                                                  @RequestBody AddressDto addressDto){
     return new ResponseEntity<>(addressService.addAddress(addressDto),HttpStatus.CREATED);
     }
 
     @PutMapping(value="/update/{id}")
-    public ResponseEntity<String> updateAddress(
+    public ResponseEntity<ResponseDTO> updateAddress(
             @PathVariable int id,
             @RequestBody AddressDto addressDto){
         return new ResponseEntity<>(addressService.updateAddress(id,addressDto),HttpStatus.OK);
     }
-
-
 
 }

@@ -7,7 +7,9 @@ import com.bridgelabz.exception.custom.BadRequestException;
 import com.bridgelabz.exception.custom.BookNotFoundException;
 import com.bridgelabz.model.Book;
 import com.bridgelabz.repository.BookStoreRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +20,13 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 @Service
+@Slf4j
 public class BookStoreService implements IBookStoreService {
 
     private static final String BOOK_NOT_FOUND = "There is no such book by the id :";
     private static final String BOOK_DETAILS_ADDED = "Book details are added successfully";
     String line = "";
+
     @Autowired
     private BookStoreRepository bookStoreRepository;
 
@@ -35,7 +39,9 @@ public class BookStoreService implements IBookStoreService {
     }
 
     @Override
+    @Cacheable(cacheNames = "book_details", key = "#id")
     public Book findBookDetailsById(int id) {
+        log.info("getBookDetailsById() is called by id --> " + id);
         return bookStoreRepository.findById(id)
                 .orElseThrow(() -> new BookNotFoundException(BOOK_NOT_FOUND + " " + id));
     }
@@ -56,7 +62,7 @@ public class BookStoreService implements IBookStoreService {
         try {
             BufferedReader bufferedReader = new BufferedReader(new
                     FileReader("src/main/resources/books_data.csv"));
-            while ((line=bufferedReader.readLine()) != null) {
+            while ((line = bufferedReader.readLine()) != null) {
                 String[] data = line.split(",");
                 Book bookEntity = new Book();
                 bookEntity.setBookAuthorName(data[1].replaceAll("'", ""));
