@@ -11,6 +11,7 @@ import com.bridgelabz.service.CartService;
 
 import com.bridgelabz.service.UserService;
 import com.bridgelabz.util.JWTUtility;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping(value = "/book-store")
 public class BookStoreController {
