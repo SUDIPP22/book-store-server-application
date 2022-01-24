@@ -25,5 +25,11 @@ public class Book implements Serializable {
     private String bookDescription;
     private String quantity;
 
-}
+    @ManyToOne
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
 
+    @ManyToOne
+    @JoinColumn(name = "wishlist_id")
+    private Wishlist wishlist;
+}
