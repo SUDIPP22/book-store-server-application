@@ -40,10 +40,11 @@ public class CartService implements ICartService {
     public ResponseDTO addToCart(CartDTO cartDTO) {
         Book book = checkIdForBook(cartDTO.getBookId());
         Cart cartEntity = new Cart();
-        cartEntity.setBook(book);
         cartEntity.setBookPrice(book.getBookPrice());
         cartEntity.setBookQuantity(cartDTO.getBookQuantity());
-        cartRepository.save(cartEntity);
+        cartEntity = cartRepository.save(cartEntity);
+        book.setCart(cartEntity);
+        bookStoreRepository.save(book);
         return new ResponseDTO(HttpStatus.CREATED, CART_DETAILS_ADDED);
     }
 

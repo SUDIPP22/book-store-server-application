@@ -1,5 +1,6 @@
 package com.bridgelabz.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,8 @@ public class Cart implements Serializable {
     private int cartId;
     private String bookQuantity;
     private String bookPrice;
-    @OneToOne(cascade = CascadeType.ALL)
-    private Book book;
+
+    @OneToMany(mappedBy="cart")
+    @JsonIgnoreProperties(value = "cart")
+    private List<Book> books;
 }
