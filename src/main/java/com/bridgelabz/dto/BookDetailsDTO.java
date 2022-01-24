@@ -30,5 +30,4 @@ public class BookDetailsDTO {
     @NotNull(message = "Description should not be empty")
     @Size(message = "Description should be within 10000 words", max = 10000)
     private String bookDescription;
-
 }
